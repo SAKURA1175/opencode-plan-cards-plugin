@@ -1,5 +1,8 @@
 # opencode-plan-cards-plugin
 
+官网（Netlify，部署后替换为你的实际域名）：
+- https://<your-netlify-site>.netlify.app
+
 让原版 OpenCode（桌面端 + CLI）获得更强的 `plan` 卡片问答流程，无需替换 `opencode-cli.exe`。
 
 ## 功能

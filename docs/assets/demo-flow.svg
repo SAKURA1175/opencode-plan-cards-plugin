@@ -1,0 +1,101 @@
+<svg width="900" height="460" viewBox="0 0 900 460" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="panel" x1="0" y1="0" x2="900" y2="460" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F8FAFF" />
+      <stop offset="1" stop-color="#EEF2FF" />
+    </linearGradient>
+    <linearGradient id="step1" x1="46" y1="112" x2="196" y2="270" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6366F1" />
+      <stop offset="1" stop-color="#4F46E5" />
+    </linearGradient>
+    <linearGradient id="step2" x1="258" y1="112" x2="408" y2="270" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7C3AED" />
+      <stop offset="1" stop-color="#6D28D9" />
+    </linearGradient>
+    <linearGradient id="step3" x1="470" y1="112" x2="620" y2="270" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2563EB" />
+      <stop offset="1" stop-color="#1D4ED8" />
+    </linearGradient>
+    <linearGradient id="step4" x1="682" y1="112" x2="832" y2="270" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0EA5E9" />
+      <stop offset="1" stop-color="#0284C7" />
+    </linearGradient>
+    <filter id="shadow" x="18" y="82" width="864" height="228" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix" />
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+      <feOffset dy="8" />
+      <feGaussianBlur stdDeviation="10" />
+      <feColorMatrix type="matrix" values="0 0 0 0 0.113725 0 0 0 0 0.164706 0 0 0 0 0.282353 0 0 0 0.16 0" />
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_0_1" />
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_0_1" result="shape" />
+    </filter>
+  </defs>
+
+  <rect x="2" y="2" width="896" height="456" rx="20" fill="url(#panel)" />
+  <rect x="2" y="2" width="896" height="456" rx="20" stroke="#E2E8FF" stroke-width="2" />
+
+  <text x="450" y="54" text-anchor="middle" fill="#1E293B" font-size="24" font-weight="700" font-family="Inter, Segoe UI, Arial, sans-serif">
+    Plan Card Workflow
+  </text>
+  <text x="450" y="82" text-anchor="middle" fill="#64748B" font-size="14" font-family="Inter, Segoe UI, Arial, sans-serif">
+    Request → Clarify with Cards → Confirm → Final Actionable Plan
+  </text>
+
+  <g filter="url(#shadow)">
+    <rect x="38" y="102" width="184" height="188" rx="16" fill="url(#step1)" />
+    <rect x="250" y="102" width="184" height="188" rx="16" fill="url(#step2)" />
+    <rect x="462" y="102" width="184" height="188" rx="16" fill="url(#step3)" />
+    <rect x="674" y="102" width="184" height="188" rx="16" fill="url(#step4)" />
+  </g>
+
+  <path d="M226 196H244" stroke="#6366F1" stroke-width="4" stroke-linecap="round" />
+  <path d="M438 196H456" stroke="#6366F1" stroke-width="4" stroke-linecap="round" />
+  <path d="M650 196H668" stroke="#6366F1" stroke-width="4" stroke-linecap="round" />
+  <path d="M239 188L248 196L239 204" stroke="#6366F1" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M451 188L460 196L451 204" stroke="#6366F1" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M663 188L672 196L663 204" stroke="#6366F1" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+
+  <text x="130" y="136" text-anchor="middle" fill="white" font-size="16" font-weight="700" font-family="Inter, Segoe UI, Arial, sans-serif">
+    1. Input
+  </text>
+  <text x="342" y="136" text-anchor="middle" fill="white" font-size="16" font-weight="700" font-family="Inter, Segoe UI, Arial, sans-serif">
+    2. Clarify
+  </text>
+  <text x="554" y="136" text-anchor="middle" fill="white" font-size="16" font-weight="700" font-family="Inter, Segoe UI, Arial, sans-serif">
+    3. Confirm
+  </text>
+  <text x="766" y="136" text-anchor="middle" fill="white" font-size="16" font-weight="700" font-family="Inter, Segoe UI, Arial, sans-serif">
+    4. Final Plan
+  </text>
+
+  <rect x="70" y="158" width="120" height="14" rx="7" fill="#EEF2FF" opacity="0.95" />
+  <rect x="70" y="182" width="95" height="12" rx="6" fill="#DBEAFE" opacity="0.95" />
+  <rect x="70" y="206" width="108" height="12" rx="6" fill="#C7D2FE" opacity="0.95" />
+
+  <rect x="282" y="158" width="120" height="14" rx="7" fill="#F5F3FF" opacity="0.95" />
+  <rect x="282" y="182" width="105" height="12" rx="6" fill="#E9D5FF" opacity="0.95" />
+  <rect x="282" y="206" width="88" height="12" rx="6" fill="#DDD6FE" opacity="0.95" />
+  <rect x="282" y="230" width="116" height="12" rx="6" fill="#C4B5FD" opacity="0.95" />
+
+  <rect x="494" y="158" width="120" height="14" rx="7" fill="#EFF6FF" opacity="0.95" />
+  <rect x="494" y="182" width="112" height="12" rx="6" fill="#DBEAFE" opacity="0.95" />
+  <rect x="494" y="206" width="100" height="12" rx="6" fill="#BFDBFE" opacity="0.95" />
+
+  <rect x="706" y="158" width="120" height="14" rx="7" fill="#ECFEFF" opacity="0.95" />
+  <rect x="706" y="182" width="98" height="12" rx="6" fill="#CFFAFE" opacity="0.95" />
+  <rect x="706" y="206" width="116" height="12" rx="6" fill="#A5F3FC" opacity="0.95" />
+  <rect x="706" y="230" width="83" height="12" rx="6" fill="#67E8F9" opacity="0.95" />
+
+  <text x="130" y="338" text-anchor="middle" fill="#334155" font-size="12" font-family="Inter, Segoe UI, Arial, sans-serif">
+    User requirement captured
+  </text>
+  <text x="342" y="338" text-anchor="middle" fill="#334155" font-size="12" font-family="Inter, Segoe UI, Arial, sans-serif">
+    Question cards (2–3 options)
+  </text>
+  <text x="554" y="338" text-anchor="middle" fill="#334155" font-size="12" font-family="Inter, Segoe UI, Arial, sans-serif">
+    Final confirmation gate
+  </text>
+  <text x="766" y="338" text-anchor="middle" fill="#334155" font-size="12" font-family="Inter, Segoe UI, Arial, sans-serif">
+    Complete actionable plan
+  </text>
+</svg>

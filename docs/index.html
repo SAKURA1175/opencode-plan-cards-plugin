@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>opencode-plan-cards-plugin</title>
+    <meta name="description" content="opencode-plan-cards-plugin official website" />
+    <meta property="og:title" content="opencode-plan-cards-plugin" />
+    <meta property="og:description" content="Plan card interaction enhancement plugin for OpenCode" />
+    <meta property="og:type" content="website" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script defer src="./content.js"></script>
+    <script defer src="./app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <header class="site-header">
+      <div class="container header-inner">
+        <a id="brand-name" class="brand" href="#top">
+          <img class="brand-logo" src="./assets/logo.svg" alt="opencode-plan-cards-plugin logo" />
+          <span class="brand-text">opencode-plan-cards-plugin</span>
+        </a>
+
+        <nav class="site-nav" aria-label="Main">
+          <a id="nav-why" href="#why"></a>
+          <a id="nav-quickstart" href="#quickstart"></a>
+          <a id="nav-manual" href="#manual"></a>
+          <a id="nav-commands" href="#commands"></a>
+          <a id="nav-faq" href="#faq"></a>
+        </nav>
+
+        <div class="header-actions">
+          <div class="lang-switch" role="group" aria-label="Language switch">
+            <button type="button" data-lang-btn="zh">中文</button>
+            <button type="button" data-lang-btn="en">EN</button>
+            <button type="button" data-lang-btn="ja">日本語</button>
+          </div>
+          <a id="header-star-link" class="btn btn-primary" target="_blank" rel="noreferrer noopener"></a>
+          <a id="header-follow-link" class="btn btn-ghost" target="_blank" rel="noreferrer noopener"></a>
+        </div>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section id="top" class="hero-section">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <p id="hero-eyebrow" class="eyebrow"></p>
+            <h1 id="hero-title"></h1>
+            <p id="hero-subtitle" class="subtitle"></p>
+            <div class="hero-cta">
+              <a id="hero-install-link" class="btn btn-primary" href="#quickstart"></a>
+              <a id="hero-manual-link" class="btn btn-soft" href="#manual"></a>
+            </div>
+          </div>
+          <aside class="hero-panel" aria-label="Project metrics">
+            <figure class="demo-figure">
+              <img
+                class="demo-illustration"
+                src="./assets/demo-flow.svg"
+                alt="Plan card interaction flow demo"
+                loading="lazy"
+              />
+              <figcaption id="demo-caption"></figcaption>
+            </figure>
+            <h2 id="badge-title"></h2>
+            <div id="badge-list" class="badge-list"></div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="why" class="section">
+        <div class="container">
+          <h2 id="why-title"></h2>
+          <div id="why-grid" class="card-grid"></div>
+        </div>
+      </section>
+
+      <section id="quickstart" class="section section-tinted">
+        <div class="container">
+          <h2 id="quickstart-title"></h2>
+          <p id="quickstart-subtitle" class="section-subtitle"></p>
+
+          <div class="quick-layout">
+            <div class="card">
+              <h3 id="quick-steps-title"></h3>
+              <ol id="quick-steps" class="step-list"></ol>
+            </div>
+            <div class="card">
+              <h3 id="quick-commands-title"></h3>
+              <div id="quick-commands" class="code-list"></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 id="quick-check-title"></h3>
+            <ul id="quick-checklist" class="bullet-list"></ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="manual" class="section">
+        <div class="container">
+          <h2 id="manual-title"></h2>
+          <p id="manual-subtitle" class="section-subtitle"></p>
+          <div id="manual-content" class="manual-grid"></div>
+        </div>
+      </section>
+
+      <section id="commands" class="section section-tinted">
+        <div class="container">
+          <h2 id="commands-title"></h2>
+          <p id="commands-subtitle" class="section-subtitle"></p>
+          <div class="table-wrap">
+            <table class="command-table">
+              <thead>
+                <tr>
+                  <th id="commands-head-command" scope="col"></th>
+                  <th id="commands-head-desc" scope="col"></th>
+                  <th id="commands-head-action" scope="col"></th>
+                </tr>
+              </thead>
+              <tbody id="commands-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="faq" class="section">
+        <div class="container">
+          <h2 id="faq-title"></h2>
+          <div id="faq-list" class="faq-list"></div>
+        </div>
+      </section>
+
+      <section class="section cta-section">
+        <div class="container cta-card">
+          <div>
+            <h2 id="bottom-title"></h2>
+            <p id="bottom-subtitle" class="section-subtitle"></p>
+          </div>
+          <div class="cta-actions">
+            <a id="bottom-star-link" class="btn btn-primary" target="_blank" rel="noreferrer noopener"></a>
+            <a id="bottom-follow-link" class="btn btn-ghost" target="_blank" rel="noreferrer noopener"></a>
+            <a id="bottom-npm-link" class="btn btn-soft" target="_blank" rel="noreferrer noopener"></a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <span id="footer-note"></span>
+        <div class="footer-links">
+          <a id="footer-repo-link" target="_blank" rel="noreferrer noopener"></a>
+          <a id="footer-issues-link" target="_blank" rel="noreferrer noopener"></a>
+          <a id="footer-license-link" target="_blank" rel="noreferrer noopener"></a>
+          <a id="footer-npm-link" target="_blank" rel="noreferrer noopener">npm</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

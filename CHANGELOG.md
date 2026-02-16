@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+
+- New static marketing website in `docs/` with:
+  - tri-language switch (zh/en/ja),
+  - detailed install/upgrade/operation/troubleshooting guide,
+  - GitHub Star + Follow conversion CTA and badge panel.
+- Netlify deployment config via `netlify.toml` (`publish = "docs"`).
+- Website source structure:
+  - `docs/index.html`
+  - `docs/styles.css`
+  - `docs/content.js`
+  - `docs/app.js`
+
 ## [0.1.2] - 2026-02-16
 
 ### Added

@@ -1,5 +1,8 @@
 # opencode-plan-cards-plugin
 
+公式サイト（Netlify、デプロイ後に実際のドメインへ置換してください）：
+- https://<your-netlify-site>.netlify.app
+
 オリジナルの OpenCode（Desktop + CLI）で、`plan` エージェントのカード型質問フローを強化するプラグインです。`opencode-cli.exe` の差し替えは不要です。
 
 ## 機能

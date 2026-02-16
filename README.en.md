@@ -1,5 +1,8 @@
 # opencode-plan-cards-plugin
 
+Official website (Netlify, replace with your actual domain after deploy):
+- https://<your-netlify-site>.netlify.app
+
 A plugin that enhances card-based planning interactions for original OpenCode (Desktop + CLI), without replacing `opencode-cli.exe`.
 
 ## Features
