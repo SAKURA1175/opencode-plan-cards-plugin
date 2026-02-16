@@ -272,7 +272,8 @@ function run(): void {
     console.log(`Backup: ${savedBackup}`)
   }
   console.log(`Plugin: ${pluginSpec}`)
-  console.log("Done. Restart OpenCode and run /plan card on in your session.")
+  console.log("Done. Restart OpenCode. Card mode is enabled by default in plan sessions.")
+  console.log("Use /plan card off to disable it for the current session.")
 }
 
 try {

@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.1.2] - 2026-02-16
+
 ### Added
 
 - Open-source community files:
@@ -17,6 +19,11 @@ All notable changes to this project will be documented in this file.
 - Added npm package metadata: `repository`, `homepage`, `bugs`, `author`, `engines`.
 - Replaced placeholder git clone URLs in all README variants.
 - Added `*.tgz` to `.gitignore`.
+- Card mode is now enabled by default for `plan` sessions after plugin installation.
+- `/plan card off` remains available for session-level opt-out.
+- `/plan card on` can re-enable card mode for that session.
+- Updated multilingual README usage examples for default-on behavior.
+- Updated setup CLI completion message to reflect default-on behavior.
 
 ## [0.1.1] - 2026-02-16
 

@@ -9,7 +9,7 @@
   - `/plan card off`
 - 开启后仅在 `plan` 会话注入“先澄清、再确认、再输出完整计划”的系统约束。
 - 强化 `question` 工具描述，推动 2–3 选项 + 权衡说明的卡片提问格式。
-- 默认不强开，按会话开关控制。
+- 安装后默认自动开启卡片模式，可按会话临时关闭。
 
 ## 兼容性
 
@@ -26,13 +26,13 @@ npx -y opencode-plan-cards-plugin@latest setup
 默认会自动：
 
 - 备份 `~/.config/opencode/opencode.json`
-- 写入 `plugin: ["opencode-plan-cards-plugin@0.1.1"]`
+- 写入 `plugin: ["opencode-plan-cards-plugin@0.1.2"]`
 - 写入 `agent.ask.hidden = true`
 
 可选参数：
 
 ```powershell
-npx -y opencode-plan-cards-plugin@latest setup --plugin opencode-plan-cards-plugin@0.1.1
+npx -y opencode-plan-cards-plugin@latest setup --plugin opencode-plan-cards-plugin@0.1.2
 npx -y opencode-plan-cards-plugin@latest setup --config "C:\Users\<you>\.config\opencode\opencode.json"
 ```
 
@@ -71,7 +71,7 @@ npm run build
 {
   "$schema": "https://opencode.ai/config.json",
   "plugin": [
-    "opencode-plan-cards-plugin@0.1.1"
+    "opencode-plan-cards-plugin@0.1.2"
   ],
   "agent": {
     "ask": {
@@ -83,14 +83,14 @@ npm run build
 
 ## 使用
 
-1. 在目标会话输入：`/plan card on`
-2. 继续在 `plan` 中描述需求，模型会优先走卡片澄清与确认流程
-3. 需要恢复默认行为时输入：`/plan card off`
+1. 安装并重启后，在 `plan` 会话中默认启用卡片澄清与确认流程
+2. 需要关闭当前会话卡片模式时输入：`/plan card off`
+3. 需要重新开启当前会话卡片模式时输入：`/plan card on`
 
 ## 验证清单
 
-1. 桌面端：`/plan card on` 后出现卡片问答流程
-2. CLI：同样命令生效
+1. 桌面端：进入 `plan` 会话后默认出现卡片问答流程
+2. CLI：同样默认生效
 3. `/plan card off` 后恢复原始 `plan` 行为
 4. `agent.ask.hidden=true` 后 UI 默认不显示 ask
 

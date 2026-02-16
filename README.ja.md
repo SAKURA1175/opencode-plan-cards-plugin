@@ -9,7 +9,7 @@
   - `/plan card off`
 - 有効化時、`plan` セッションにのみ「要件確認 → 最終確認 → 完全な実行計画出力」の制約を注入。
 - `question` ツール定義を強化し、2〜3択 + トレードオフ説明のカード質問を促進。
-- デフォルトは無効。セッションごとのスイッチで制御。
+- インストール後はデフォルトで有効。セッションごとに切り替え可能。
 
 ## 互換性
 
@@ -26,13 +26,13 @@ npx -y opencode-plan-cards-plugin@latest setup
 このコマンドは自動で以下を実行します：
 
 - `~/.config/opencode/opencode.json` のバックアップ作成
-- `plugin: ["opencode-plan-cards-plugin@0.1.1"]` を設定
+- `plugin: ["opencode-plan-cards-plugin@0.1.2"]` を設定
 - `agent.ask.hidden = true` を設定
 
 オプション：
 
 ```powershell
-npx -y opencode-plan-cards-plugin@latest setup --plugin opencode-plan-cards-plugin@0.1.1
+npx -y opencode-plan-cards-plugin@latest setup --plugin opencode-plan-cards-plugin@0.1.2
 npx -y opencode-plan-cards-plugin@latest setup --config "C:\Users\<you>\.config\opencode\opencode.json"
 ```
 
@@ -71,7 +71,7 @@ npm run build
 {
   "$schema": "https://opencode.ai/config.json",
   "plugin": [
-    "opencode-plan-cards-plugin@0.1.1"
+    "opencode-plan-cards-plugin@0.1.2"
   ],
   "agent": {
     "ask": {
@@ -83,14 +83,14 @@ npm run build
 
 ## 使い方
 
-1. 対象セッションで `/plan card on` を入力
-2. `plan` で要件を入力すると、カードによる確認フローが優先される
-3. 既定動作に戻す場合は `/plan card off`
+1. インストール後に再起動すると、`plan` セッションではカードモードがデフォルトで有効
+2. 現在のセッションでカードモードを無効化する場合は `/plan card off`
+3. 現在のセッションでカードモードを再有効化する場合は `/plan card on`
 
 ## 動作確認チェックリスト
 
-1. Desktop：`/plan card on` 後にカード質問フローが表示される
-2. CLI：同様にコマンドが有効
+1. Desktop：`plan` セッションでデフォルトでカード質問フローが表示される
+2. CLI：同様にデフォルトで有効
 3. `/plan card off` 後に標準 `plan` 挙動へ復帰
 4. `agent.ask.hidden=true` で UI の ask を非表示化
 

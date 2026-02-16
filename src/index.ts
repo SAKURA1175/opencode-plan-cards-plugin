@@ -4,6 +4,7 @@ import type { Part } from "@opencode-ai/sdk"
 type CardModeCommand = "on" | "off"
 
 const CARD_COMMAND_PATTERN = /^\/plan\s+card\s+(on|off)$/i
+const DEFAULT_CARD_MODE = true
 const cardModeBySession = new Map<string, boolean>()
 const lastAgentBySession = new Map<string, string>()
 
@@ -67,6 +68,12 @@ function appendUniqueDescription(base: string, appendix: string): string {
   return `${base.trim()}\n\n${normalized}`
 }
 
+function isCardModeEnabled(sessionID: string): boolean {
+  const mode = cardModeBySession.get(sessionID)
+  if (mode === undefined) return DEFAULT_CARD_MODE
+  return mode
+}
+
 function patchQuestionParameters(parameters: any) {
   const questionItem = parameters?.properties?.questions?.items
   const questionProps = questionItem?.properties
@@ -111,7 +118,7 @@ export const PlanCardsPlugin: Plugin = async () => {
 
     "experimental.chat.system.transform": async (input, output) => {
       if (!input.sessionID) return
-      if (!cardModeBySession.get(input.sessionID)) return
+      if (!isCardModeEnabled(input.sessionID)) return
       if (lastAgentBySession.get(input.sessionID) !== "plan") return
       output.system.push(PLAN_CARD_SYSTEM_APPENDIX)
     },
