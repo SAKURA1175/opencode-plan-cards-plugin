@@ -1,5 +1,10 @@
 # opencode-plan-cards-plugin
 
+Language / 语言 / 言語:
+- [English](./README.en.md)
+- [简体中文](./README.zh-CN.md)
+- [日本語](./README.ja.md)
+
 让原版 OpenCode（桌面端 + CLI）获得更强的 `plan` 卡片问答流程，无需替换 `opencode-cli.exe`。
 
 ## 功能
