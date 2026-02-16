@@ -15,8 +15,28 @@ A plugin that enhances card-based planning interactions for original OpenCode (D
 
 - OpenCode: `1.2.x` (Desktop / CLI)
 - Plugin distribution: both `file://` and npm package
+- One-command installer: Node.js `18+`
 
-## Installation (Method A: Git + file://, recommended first)
+## Installation (Method A: npm one-command setup, recommended)
+
+```powershell
+npx -y opencode-plan-cards-plugin@latest setup
+```
+
+By default this command:
+
+- creates a backup of `~/.config/opencode/opencode.json`
+- writes `plugin: ["opencode-plan-cards-plugin@0.1.1"]`
+- writes `agent.ask.hidden = true`
+
+Optional flags:
+
+```powershell
+npx -y opencode-plan-cards-plugin@latest setup --plugin opencode-plan-cards-plugin@0.1.1
+npx -y opencode-plan-cards-plugin@latest setup --config "C:\Users\<you>\.config\opencode\opencode.json"
+```
+
+## Installation (Method B: Git + file://)
 
 ```powershell
 git clone <your-repo-url> opencode-plan-cards-plugin
@@ -43,7 +63,7 @@ Configure plugin in `~/.config/opencode/opencode.json`:
 
 > On Windows, use `file:///` paths and encode spaces as `%20`.
 
-## Installation (Method B: npm)
+## Installation (Method C: npm manual config)
 
 After publishing, user config:
 
@@ -51,7 +71,7 @@ After publishing, user config:
 {
   "$schema": "https://opencode.ai/config.json",
   "plugin": [
-    "opencode-plan-cards-plugin@0.1.0"
+    "opencode-plan-cards-plugin@0.1.1"
   ],
   "agent": {
     "ask": {

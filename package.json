@@ -1,9 +1,12 @@
 {
   "name": "opencode-plan-cards-plugin",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Plan card interaction enhancement plugin for OpenCode",
   "type": "module",
   "main": "dist/index.js",
+  "bin": {
+    "opencode-plan-cards-plugin": "dist/cli.js"
+  },
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
@@ -34,6 +37,7 @@
   "devDependencies": {
     "@opencode-ai/plugin": "^1.2.0",
     "@opencode-ai/sdk": "^1.2.0",
+    "@types/node": "^22.13.10",
     "typescript": "^5.7.3"
   }
 }

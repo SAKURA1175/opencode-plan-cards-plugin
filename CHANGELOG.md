@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.1] - 2026-02-16
+
+### Added
+
+- CLI setup command for one-command installation:
+  - `npx -y opencode-plan-cards-plugin@latest setup`
+- Automatic `opencode.json` update with:
+  - `plugin: ["opencode-plan-cards-plugin@0.1.1"]`
+  - `agent.ask.hidden = true`
+- Automatic backup creation before writing config.
+
+### Changed
+
+- Added package binary entry for CLI execution.
+- Updated multilingual README files with one-command setup guide.
+
 ## [0.1.0] - 2026-02-16
 
 ### Added

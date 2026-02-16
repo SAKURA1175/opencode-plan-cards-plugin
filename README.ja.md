@@ -15,8 +15,28 @@
 
 - OpenCode: `1.2.x`（Desktop / CLI）
 - プラグイン配布形態：`file://` と npm の両対応
+- ワンコマンド設定: Node.js `18+`
 
-## インストール（方式 A：Git + file://、初回推奨）
+## インストール（方式 A：npm ワンコマンド設定、推奨）
+
+```powershell
+npx -y opencode-plan-cards-plugin@latest setup
+```
+
+このコマンドは自動で以下を実行します：
+
+- `~/.config/opencode/opencode.json` のバックアップ作成
+- `plugin: ["opencode-plan-cards-plugin@0.1.1"]` を設定
+- `agent.ask.hidden = true` を設定
+
+オプション：
+
+```powershell
+npx -y opencode-plan-cards-plugin@latest setup --plugin opencode-plan-cards-plugin@0.1.1
+npx -y opencode-plan-cards-plugin@latest setup --config "C:\Users\<you>\.config\opencode\opencode.json"
+```
+
+## インストール（方式 B：Git + file://）
 
 ```powershell
 git clone <your-repo-url> opencode-plan-cards-plugin
@@ -43,7 +63,7 @@ npm run build
 
 > Windows では `file:///` 形式を使用し、空白は `%20` にしてください。
 
-## インストール（方式 B：npm）
+## インストール（方式 C：npm 手動設定）
 
 公開後、ユーザー設定：
 
@@ -51,7 +71,7 @@ npm run build
 {
   "$schema": "https://opencode.ai/config.json",
   "plugin": [
-    "opencode-plan-cards-plugin@0.1.0"
+    "opencode-plan-cards-plugin@0.1.1"
   ],
   "agent": {
     "ask": {

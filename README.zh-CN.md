@@ -15,8 +15,28 @@
 
 - OpenCode: `1.2.x`（桌面端 / CLI）
 - 插件形态：`file://` 与 npm 包均可
+- 一键安装器：Node.js `18+`
 
-## 安装（方式 A：Git + file://，推荐首发）
+## 安装（方式 A：npm 一键写配置，推荐）
+
+```powershell
+npx -y opencode-plan-cards-plugin@latest setup
+```
+
+默认会自动：
+
+- 备份 `~/.config/opencode/opencode.json`
+- 写入 `plugin: ["opencode-plan-cards-plugin@0.1.1"]`
+- 写入 `agent.ask.hidden = true`
+
+可选参数：
+
+```powershell
+npx -y opencode-plan-cards-plugin@latest setup --plugin opencode-plan-cards-plugin@0.1.1
+npx -y opencode-plan-cards-plugin@latest setup --config "C:\Users\<you>\.config\opencode\opencode.json"
+```
+
+## 安装（方式 B：Git + file://）
 
 ```powershell
 git clone <your-repo-url> opencode-plan-cards-plugin
@@ -43,7 +63,7 @@ npm run build
 
 > Windows 路径需要使用 `file:///`，空格写成 `%20`。
 
-## 安装（方式 B：npm）
+## 安装（方式 C：npm 手动配置）
 
 发布后，用户配置：
 
@@ -51,7 +71,7 @@ npm run build
 {
   "$schema": "https://opencode.ai/config.json",
   "plugin": [
-    "opencode-plan-cards-plugin@0.1.0"
+    "opencode-plan-cards-plugin@0.1.1"
   ],
   "agent": {
     "ask": {
