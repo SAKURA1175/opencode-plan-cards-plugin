@@ -2,6 +2,19 @@
   "name": "opencode-plan-cards-plugin",
   "version": "0.1.1",
   "description": "Plan card interaction enhancement plugin for OpenCode",
+  "author": "sakura1175",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SAKURA1175/opencode-plan-cards-plugin.git"
+  },
+  "homepage": "https://github.com/SAKURA1175/opencode-plan-cards-plugin#readme",
+  "bugs": {
+    "url": "https://github.com/SAKURA1175/opencode-plan-cards-plugin/issues"
+  },
+  "engines": {
+    "node": ">=18"
+  },
   "type": "module",
   "main": "dist/index.js",
   "bin": {
@@ -29,8 +42,6 @@
     "plan",
     "cards"
   ],
-  "author": "",
-  "license": "MIT",
   "peerDependencies": {
     "@opencode-ai/plugin": ">=1.2.0 <2"
   },

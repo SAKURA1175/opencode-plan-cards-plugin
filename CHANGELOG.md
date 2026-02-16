@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+### Added
+
+- Open-source community files:
+  - `CONTRIBUTING.md`
+  - `SECURITY.md`
+  - `CODE_OF_CONDUCT.md`
+- GitHub Actions CI workflow (`.github/workflows/ci.yml`) for type-check and build.
+
+### Changed
+
+- Added npm package metadata: `repository`, `homepage`, `bugs`, `author`, `engines`.
+- Replaced placeholder git clone URLs in all README variants.
+- Added `*.tgz` to `.gitignore`.
+
 ## [0.1.1] - 2026-02-16
 
 ### Added

@@ -39,7 +39,7 @@ npx -y opencode-plan-cards-plugin@latest setup --config "C:\Users\<you>\.config\
 ## インストール（方式 B：Git + file://）
 
 ```powershell
-git clone <your-repo-url> opencode-plan-cards-plugin
+git clone https://github.com/SAKURA1175/opencode-plan-cards-plugin.git opencode-plan-cards-plugin
 cd opencode-plan-cards-plugin
 npm install
 npm run build
