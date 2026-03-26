@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.1.4] - 2026-03-26
+
+### Changed
+
+- Replace fixed-feeling plan follow-up behavior with adaptive questioning guidance based on request complexity, ambiguity, and constraint density.
+- Add explicit clarification caps so simple requests stop after fewer follow-up cards while complex requests can ask more when needed.
+
 ## [0.1.3] - 2026-03-26
 
 ### Fixed

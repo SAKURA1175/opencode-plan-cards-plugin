@@ -13,6 +13,7 @@ A plugin that enhances card-based planning interactions for original OpenCode (D
   - `/plan card off`
 - When enabled, it injects a stricter `plan` workflow: clarify first, confirm, then output a complete plan.
 - Enhances the `question` tool definition to encourage card questions with 2–3 options and clear tradeoff descriptions.
+- Follow-up count adapts to task complexity, ambiguity, and constraint density instead of feeling fixed across all plan sessions.
 - Enabled by default after installation; still controllable per session.
 
 ## Compatibility
