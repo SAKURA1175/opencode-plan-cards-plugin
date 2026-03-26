@@ -13,6 +13,7 @@
   - `/plan card off`
 - 有効化時、`plan` セッションにのみ「要件確認 → 最終確認 → 完全な実行計画出力」の制約を注入。
 - `question` ツール定義を強化し、2〜3択 + トレードオフ説明のカード質問を促進。
+- プラグイン側の明確化ステートマシンを内蔵し、`目的 / 範囲 / 制約 / 受け入れ条件` の充足状況を継続追跡します。
 - 追質問の回数は固定ではなく、タスクの複雑さ・情報不足・制約の多さに応じて自動調整されます。
 - インストール後はデフォルトで有効。セッションごとに切り替え可能。
 
@@ -31,13 +32,13 @@ npx -y opencode-plan-cards-plugin@latest setup
 このコマンドは自動で以下を実行します：
 
 - `~/.config/opencode/opencode.json` のバックアップ作成
-- `plugin: ["opencode-plan-cards-plugin@0.1.3"]` を設定
+- `plugin: ["opencode-plan-cards-plugin@0.1.5"]` を設定
 - `agent.ask.hidden = true` を設定
 
 オプション：
 
 ```powershell
-npx -y opencode-plan-cards-plugin@latest setup --plugin opencode-plan-cards-plugin@0.1.3
+npx -y opencode-plan-cards-plugin@latest setup --plugin opencode-plan-cards-plugin@0.1.5
 npx -y opencode-plan-cards-plugin@latest setup --config "C:\Users\<you>\.config\opencode\opencode.json"
 ```
 
@@ -75,7 +76,7 @@ npm run build
 ```json
 {
   "$schema": "https://opencode.ai/config.json",
-  "plugin": ["opencode-plan-cards-plugin@0.1.3"],
+  "plugin": ["opencode-plan-cards-plugin@0.1.5"],
   "agent": {
     "ask": {
       "hidden": true

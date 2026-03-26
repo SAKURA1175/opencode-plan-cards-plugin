@@ -19,6 +19,7 @@ Language / 语言 / 言語:
   - `/plan card off`
 - 开启后仅在 `plan` 会话注入“先澄清、再确认、再输出完整计划”的系统约束。
 - 强化 `question` 工具描述，推动 2–3 选项 + 权衡说明的卡片提问格式。
+- 内置插件侧澄清状态机，持续跟踪 `目标 / 范围 / 约束 / 验收标准` 是否已经明确。
 - 追问次数不再表现为固定轮次，而是根据任务复杂度、信息缺口和约束密度自适应收敛。
 - 安装后默认自动开启卡片模式，可按会话临时关闭。
 
@@ -37,13 +38,13 @@ npx -y opencode-plan-cards-plugin@latest setup
 默认会自动：
 
 - 备份 `~/.config/opencode/opencode.json`
-- 写入 `plugin: ["opencode-plan-cards-plugin@0.1.3"]`
+- 写入 `plugin: ["opencode-plan-cards-plugin@0.1.5"]`
 - 写入 `agent.ask.hidden = true`
 
 可选参数：
 
 ```powershell
-npx -y opencode-plan-cards-plugin@latest setup --plugin opencode-plan-cards-plugin@0.1.3
+npx -y opencode-plan-cards-plugin@latest setup --plugin opencode-plan-cards-plugin@0.1.5
 npx -y opencode-plan-cards-plugin@latest setup --config "C:\Users\<you>\.config\opencode\opencode.json"
 ```
 
@@ -81,7 +82,7 @@ npm run build
 ```json
 {
   "$schema": "https://opencode.ai/config.json",
-  "plugin": ["opencode-plan-cards-plugin@0.1.3"],
+  "plugin": ["opencode-plan-cards-plugin@0.1.5"],
   "agent": {
     "ask": {
       "hidden": true

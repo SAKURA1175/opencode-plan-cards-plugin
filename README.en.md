@@ -13,6 +13,7 @@ A plugin that enhances card-based planning interactions for original OpenCode (D
   - `/plan card off`
 - When enabled, it injects a stricter `plan` workflow: clarify first, confirm, then output a complete plan.
 - Enhances the `question` tool definition to encourage card questions with 2–3 options and clear tradeoff descriptions.
+- Includes a plugin-side clarification state machine that tracks `objective / scope / constraints / acceptance criteria` across the session.
 - Follow-up count adapts to task complexity, ambiguity, and constraint density instead of feeling fixed across all plan sessions.
 - Enabled by default after installation; still controllable per session.
 
@@ -31,13 +32,13 @@ npx -y opencode-plan-cards-plugin@latest setup
 By default this command:
 
 - creates a backup of `~/.config/opencode/opencode.json`
-- writes `plugin: ["opencode-plan-cards-plugin@0.1.3"]`
+- writes `plugin: ["opencode-plan-cards-plugin@0.1.5"]`
 - writes `agent.ask.hidden = true`
 
 Optional flags:
 
 ```powershell
-npx -y opencode-plan-cards-plugin@latest setup --plugin opencode-plan-cards-plugin@0.1.3
+npx -y opencode-plan-cards-plugin@latest setup --plugin opencode-plan-cards-plugin@0.1.5
 npx -y opencode-plan-cards-plugin@latest setup --config "C:\Users\<you>\.config\opencode\opencode.json"
 ```
 
@@ -75,7 +76,7 @@ After publishing, user config:
 ```json
 {
   "$schema": "https://opencode.ai/config.json",
-  "plugin": ["opencode-plan-cards-plugin@0.1.3"],
+  "plugin": ["opencode-plan-cards-plugin@0.1.5"],
   "agent": {
     "ask": {
       "hidden": true

@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.1.5] - 2026-03-26
+
+### Changed
+
+- Replace prompt-only follow-up throttling with a plugin-side clarification state machine.
+- Track objective, scope, constraints, and acceptance criteria coverage across the session and stop asking once the plan is clear.
+- Apply adaptive clarification budgets per session so simple requests converge quickly while complex requests still get enough discovery.
+
 ## [0.1.4] - 2026-03-26
 
 ### Changed

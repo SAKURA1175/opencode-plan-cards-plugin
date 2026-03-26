@@ -2,12 +2,17 @@ import type { Plugin } from "@opencode-ai/plugin";
 import type { Part } from "@opencode-ai/sdk";
 
 type CardModeCommand = "on" | "off";
+type PlanField = "objective" | "scope" | "constraints" | "acceptance";
+type PlanState = {
+  enabled?: boolean;
+  userTexts: string[];
+  clarificationRounds: number;
+};
 
 const CARD_COMMAND_PATTERN = /^\/plan\s+card\s+(on|off)$/i;
 const DEFAULT_CARD_MODE = true;
-const cardModeBySession = new Map<string, boolean>();
+const sessionState = new Map<string, PlanState>();
 const lastAgentBySession = new Map<string, string>();
-const lastUserTextBySession = new Map<string, string>();
 
 const QUESTION_TOOL_APPENDIX = `
 Card interaction requirements:
@@ -20,6 +25,21 @@ Card interaction requirements:
 
 function isTextPart(part: Part): part is Extract<Part, { type: "text" }> {
   return part.type === "text";
+}
+
+function isToolPart(part: Part): part is Extract<Part, { type: "tool" }> {
+  return part.type === "tool";
+}
+
+function state(sessionID: string): PlanState {
+  const existing = sessionState.get(sessionID);
+  if (existing) return existing;
+  const created = {
+    userTexts: [],
+    clarificationRounds: 0,
+  } satisfies PlanState;
+  sessionState.set(sessionID, created);
+  return created;
 }
 
 function visibleText(parts: Part[]): string {
@@ -66,114 +86,266 @@ function appendUniqueDescription(base: string, appendix: string): string {
 }
 
 function isCardModeEnabled(sessionID: string): boolean {
-  const mode = cardModeBySession.get(sessionID);
+  const mode = sessionState.get(sessionID)?.enabled;
   if (mode === undefined) return DEFAULT_CARD_MODE;
   return mode;
 }
 
-function planProfile(text: string) {
-  const lower = text.toLowerCase();
-  const lines = text.split(/\n+/).filter((x) => x.trim());
-  const words = text.split(/\s+/).filter(Boolean);
+function setCardMode(sessionID: string, enabled: boolean) {
+  Object.assign(state(sessionID), { enabled });
+}
+
+function hasKeyword(text: string, list: string[]) {
+  return list.some((item) => text.includes(item));
+}
+
+function analyzePlanState(texts: string[]) {
+  const merged = texts.join("\n").trim();
+  const lower = merged.toLowerCase();
+  const lines = merged.split(/\n+/).filter((item) => item.trim());
+  const words = merged.split(/\s+/).filter(Boolean);
   const bullets = lines.filter((line) => /^[-*\d.]/.test(line.trim())).length;
-  const hard = [
-    "architecture",
-    "refactor",
-    "migration",
-    "performance",
-    "security",
-    "auth",
-    "database",
-    "plugin",
-    "workflow",
-    "release",
-    "multi",
-    "complex",
-    "integrat",
-  ].some((token) => lower.includes(token));
-  const bounded = [
+  const objective =
+    merged.length > 24 ||
+    hasKeyword(lower, [
+      "fix",
+      "add",
+      "update",
+      "implement",
+      "support",
+      "remove",
+      "refactor",
+      "optimize",
+      "want",
+      "need",
+      "修复",
+      "新增",
+      "更新",
+      "实现",
+      "支持",
+      "优化",
+      "需要",
+    ]);
+  const scope =
+    hasKeyword(lower, [
+      "ui",
+      "api",
+      "cli",
+      "desktop",
+      "plugin",
+      "session",
+      "workflow",
+      "build",
+      "plan",
+      "test",
+      "docs",
+      "frontend",
+      "backend",
+      "component",
+      "module",
+      "repository",
+      "页面",
+      "接口",
+      "插件",
+      "仓库",
+      "模块",
+      "前端",
+      "后端",
+      "测试",
+    ]) || bullets >= 2;
+  const constraints = hasKeyword(lower, [
+    "must",
+    "should",
+    "cannot",
+    "can't",
+    "don't",
+    "without",
+    "preserve",
+    "compatible",
+    "compatibility",
+    "minimal",
+    "no new",
+    "avoid",
+    "keep",
+    "require",
+    "必须",
+    "不能",
+    "不要",
+    "兼容",
+    "保留",
+    "最小改动",
+    "不引入",
+  ]);
+  const acceptance = hasKeyword(lower, [
+    "verify",
+    "verification",
+    "test",
+    "works",
+    "working",
+    "should be able",
+    "done when",
+    "expected",
+    "success",
+    "acceptance",
+    "验证",
+    "测试",
+    "成功",
+    "完成条件",
+    "应该",
+    "可以",
+    "能够",
+    "自动切换",
+  ]);
+  const ambiguous = hasKeyword(lower, [
+    "maybe",
+    "not sure",
+    "help me",
+    "look at",
+    "improve",
+    "better",
+    "something",
+    "看看",
+    "优化一下",
+    "不太确定",
+  ]);
+  const bounded = hasKeyword(lower, [
     "just",
     "only",
     "simple",
     "small",
     "minor",
-    "typo",
     "quick",
-    "bug",
-    "fix this",
-  ].some((token) => lower.includes(token));
-  const ambiguous = [
-    "maybe",
-    "not sure",
-    "help me",
-    "look at",
-    "optimize",
-    "improve",
-    "support",
-    "better",
-    "something",
-  ].some((token) => lower.includes(token));
-  const constrained = [
-    "must",
-    "should",
-    "cannot",
-    "don't",
-    "compat",
-    "preserve",
-    "without",
-    "need to",
-    "require",
-  ].some((token) => lower.includes(token));
+    "just need",
+    "只是",
+    "仅",
+    "小改",
+    "顺手",
+  ]);
+  const hard = hasKeyword(lower, [
+    "architecture",
+    "migration",
+    "security",
+    "database",
+    "performance",
+    "release",
+    "multi",
+    "complex",
+    "integrat",
+    "cross",
+    "架构",
+    "迁移",
+    "安全",
+    "数据库",
+    "性能",
+    "发布",
+    "多端",
+    "复杂",
+    "集成",
+  ]);
 
+  const fields = { objective, scope, constraints, acceptance };
+  const missing = Object.entries(fields)
+    .filter(([, known]) => !known)
+    .map(([name]) => name as PlanField);
   const score =
     (words.length > 120 ? 2 : words.length > 40 ? 1 : 0) +
     (bullets >= 3 ? 1 : 0) +
     (hard ? 2 : 0) +
     (ambiguous ? 1 : 0) +
-    (constrained ? 1 : 0) -
+    (constraints ? 1 : 0) +
+    Math.min(missing.length, 2) -
     (bounded ? 1 : 0);
 
   if (score <= 1) {
     return {
       level: "low",
-      rounds: "usually 1 round",
-      questions:
-        "ask 1 focused question by default; ask 2 only if one key blocker remains",
-      total: "hard cap: 2 clarification questions before confirmation",
+      fields,
+      missing,
+      maxRounds: 1,
+      maxQuestions: 2,
+      perRound: 1,
     };
   }
 
   if (score <= 3) {
     return {
       level: "medium",
-      rounds: "usually 1-2 rounds",
-      questions: "ask 1-2 focused questions per round",
-      total: "hard cap: 4 clarification questions before confirmation",
+      fields,
+      missing,
+      maxRounds: 2,
+      maxQuestions: 4,
+      perRound: 2,
     };
   }
 
   return {
     level: "high",
-    rounds: "usually 2 rounds",
-    questions:
-      "ask 2 focused questions per round; use 3 only when multiple critical unknowns remain",
-    total: "hard cap: 6 clarification questions before confirmation",
+    fields,
+    missing,
+    maxRounds: 3,
+    maxQuestions: 6,
+    perRound: 2,
   };
 }
 
-function planCardSystemAppendix(text: string): string {
-  const profile = planProfile(text);
+function label(field: PlanField) {
+  if (field === "objective") return "objective";
+  if (field === "scope") return "scope";
+  if (field === "constraints") return "constraints";
+  return "acceptance criteria";
+}
+
+function status(field: boolean) {
+  return field ? "known" : "missing";
+}
+
+function planCardSystemAppendix(sessionID: string): string {
+  const snapshot = state(sessionID);
+  const analysis = analyzePlanState(snapshot.userTexts);
+  const remainingRounds = Math.max(
+    analysis.maxRounds - snapshot.clarificationRounds,
+    0,
+  );
+  const remainingQuestions = Math.max(
+    analysis.maxQuestions - snapshot.clarificationRounds * analysis.perRound,
+    0,
+  );
+  const nextQuestions = Math.min(
+    analysis.perRound,
+    Math.max(analysis.missing.length, 1),
+    Math.max(remainingQuestions, analysis.missing.length === 0 ? 1 : 0),
+  );
+  const ready =
+    analysis.missing.length === 0 ||
+    remainingRounds === 0 ||
+    remainingQuestions === 0;
+
   return `
 Plan card mode is enabled for this session.
 
-Questioning policy:
-- Estimate request complexity from the latest user request. Current complexity: ${profile.level}.
-- Do not use a fixed number of follow-up questions. Stop as soon as the implementation is clear.
-- ${profile.rounds}.
-- ${profile.questions}.
-- ${profile.total}.
-- Prefer combining related unknowns into the minimum viable number of questions.
-- If the user already provided clear scope, constraints, and acceptance criteria, skip straight to confirmation.
+Clarification state machine:
+- Complexity level: ${analysis.level}.
+- objective: ${status(analysis.fields.objective)}.
+- scope: ${status(analysis.fields.scope)}.
+- constraints: ${status(analysis.fields.constraints)}.
+- acceptance criteria: ${status(analysis.fields.acceptance)}.
+- Missing fields: ${analysis.missing.length ? analysis.missing.map(label).join(", ") : "none"}.
+- Clarification rounds already used: ${snapshot.clarificationRounds}/${analysis.maxRounds}.
+- Remaining clarification budget: ${remainingQuestions} question(s).
+
+Clarification policy:
+- Do not use a fixed number of follow-up questions.
+- Ask only for missing fields that materially change implementation.
+- Collapse related unknowns into the minimum viable number of questions.
+- Low-risk gaps should become explicit assumptions in the final plan instead of extra questions.
+- If objective, scope, constraints, and acceptance criteria are all clear, stop clarifying immediately.
+
+Next-step policy:
+${
+  ready
+    ? "- Do not ask more clarification questions. Ask exactly one final confirmation question via the question tool, then finalize the plan after confirmation."
+    : `- Ask at most ${nextQuestions} high-value clarification question(s) in this turn, focused only on the missing fields above.`
+}
 
 Mandatory workflow:
 0. Keep all existing core plan-mode requirements from the host OpenCode version.
@@ -216,27 +388,36 @@ export const PlanCardsPlugin: Plugin = async () => {
       const sessionID = (event.properties as { sessionID?: string } | undefined)
         ?.sessionID;
       if (!sessionID) return;
-      cardModeBySession.delete(sessionID);
+      sessionState.delete(sessionID);
       lastAgentBySession.delete(sessionID);
-      lastUserTextBySession.delete(sessionID);
     },
 
     "chat.message": async (input, output) => {
       const sessionID = input.sessionID;
       const command = extractCardModeCommand(output.parts);
       const text = visibleText(output.parts);
-
-      if (text) {
-        lastUserTextBySession.set(sessionID, text);
-      }
+      const snapshot = state(sessionID);
 
       if (command) {
-        cardModeBySession.set(sessionID, command === "on");
+        setCardMode(sessionID, command === "on");
         output.message.agent = "ask";
         output.message.system = appendUniqueDescription(
           output.message.system ?? "",
           commandConfirmationPrompt(command),
         );
+      }
+
+      if (text && !command) {
+        snapshot.userTexts = [...snapshot.userTexts, text].slice(-8);
+      }
+
+      if (
+        output.message.agent === "plan" &&
+        output.parts.some(
+          (part) => isToolPart(part) && part.tool === "question",
+        )
+      ) {
+        snapshot.clarificationRounds += 1;
       }
 
       lastAgentBySession.set(sessionID, output.message.agent);
@@ -246,11 +427,7 @@ export const PlanCardsPlugin: Plugin = async () => {
       if (!input.sessionID) return;
       if (!isCardModeEnabled(input.sessionID)) return;
       if (lastAgentBySession.get(input.sessionID) !== "plan") return;
-      output.system.push(
-        planCardSystemAppendix(
-          lastUserTextBySession.get(input.sessionID) ?? "",
-        ),
-      );
+      output.system.push(planCardSystemAppendix(input.sessionID));
     },
 
     "tool.definition": async (input, output) => {
