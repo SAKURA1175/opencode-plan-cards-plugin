@@ -1,6 +1,7 @@
 # opencode-plan-cards-plugin
 
 公式サイト（Netlify、デプロイ後に実際のドメインへ置換してください）：
+
 - https://<your-netlify-site>.netlify.app
 
 オリジナルの OpenCode（Desktop + CLI）で、`plan` エージェントのカード型質問フローを強化するプラグインです。`opencode-cli.exe` の差し替えは不要です。
@@ -29,13 +30,13 @@ npx -y opencode-plan-cards-plugin@latest setup
 このコマンドは自動で以下を実行します：
 
 - `~/.config/opencode/opencode.json` のバックアップ作成
-- `plugin: ["opencode-plan-cards-plugin@0.1.2"]` を設定
+- `plugin: ["opencode-plan-cards-plugin@0.1.3"]` を設定
 - `agent.ask.hidden = true` を設定
 
 オプション：
 
 ```powershell
-npx -y opencode-plan-cards-plugin@latest setup --plugin opencode-plan-cards-plugin@0.1.2
+npx -y opencode-plan-cards-plugin@latest setup --plugin opencode-plan-cards-plugin@0.1.3
 npx -y opencode-plan-cards-plugin@latest setup --config "C:\Users\<you>\.config\opencode\opencode.json"
 ```
 
@@ -73,9 +74,7 @@ npm run build
 ```json
 {
   "$schema": "https://opencode.ai/config.json",
-  "plugin": [
-    "opencode-plan-cards-plugin@0.1.2"
-  ],
+  "plugin": ["opencode-plan-cards-plugin@0.1.3"],
   "agent": {
     "ask": {
       "hidden": true

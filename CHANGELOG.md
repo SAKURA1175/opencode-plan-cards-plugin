@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.1.3] - 2026-03-26
+
+### Fixed
+
+- Improve compatibility with newer OpenCode plan mode by explicitly preserving core plan workflow requirements.
+- Add explicit `plan_exit` completion rule to plugin-injected plan card guidance so sessions can auto-switch from `plan` to `build`.
+
 ### Added
 
 - New static marketing website in `docs/` with:

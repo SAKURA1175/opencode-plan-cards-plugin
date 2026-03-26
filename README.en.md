@@ -1,6 +1,7 @@
 # opencode-plan-cards-plugin
 
 Official website (Netlify, replace with your actual domain after deploy):
+
 - https://<your-netlify-site>.netlify.app
 
 A plugin that enhances card-based planning interactions for original OpenCode (Desktop + CLI), without replacing `opencode-cli.exe`.
@@ -29,13 +30,13 @@ npx -y opencode-plan-cards-plugin@latest setup
 By default this command:
 
 - creates a backup of `~/.config/opencode/opencode.json`
-- writes `plugin: ["opencode-plan-cards-plugin@0.1.2"]`
+- writes `plugin: ["opencode-plan-cards-plugin@0.1.3"]`
 - writes `agent.ask.hidden = true`
 
 Optional flags:
 
 ```powershell
-npx -y opencode-plan-cards-plugin@latest setup --plugin opencode-plan-cards-plugin@0.1.2
+npx -y opencode-plan-cards-plugin@latest setup --plugin opencode-plan-cards-plugin@0.1.3
 npx -y opencode-plan-cards-plugin@latest setup --config "C:\Users\<you>\.config\opencode\opencode.json"
 ```
 
@@ -73,9 +74,7 @@ After publishing, user config:
 ```json
 {
   "$schema": "https://opencode.ai/config.json",
-  "plugin": [
-    "opencode-plan-cards-plugin@0.1.2"
-  ],
+  "plugin": ["opencode-plan-cards-plugin@0.1.3"],
   "agent": {
     "ask": {
       "hidden": true

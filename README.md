@@ -1,11 +1,13 @@
 # opencode-plan-cards-plugin
 
 Language / 语言 / 言語:
+
 - [English](./README.en.md)
 - [简体中文](./README.zh-CN.md)
 - [日本語](./README.ja.md)
 
 官网（Netlify，部署后替换为你的实际域名）：
+
 - https://<your-netlify-site>.netlify.app
 
 让原版 OpenCode（桌面端 + CLI）获得更强的 `plan` 卡片问答流程，无需替换 `opencode-cli.exe`。
@@ -34,13 +36,13 @@ npx -y opencode-plan-cards-plugin@latest setup
 默认会自动：
 
 - 备份 `~/.config/opencode/opencode.json`
-- 写入 `plugin: ["opencode-plan-cards-plugin@0.1.2"]`
+- 写入 `plugin: ["opencode-plan-cards-plugin@0.1.3"]`
 - 写入 `agent.ask.hidden = true`
 
 可选参数：
 
 ```powershell
-npx -y opencode-plan-cards-plugin@latest setup --plugin opencode-plan-cards-plugin@0.1.2
+npx -y opencode-plan-cards-plugin@latest setup --plugin opencode-plan-cards-plugin@0.1.3
 npx -y opencode-plan-cards-plugin@latest setup --config "C:\Users\<you>\.config\opencode\opencode.json"
 ```
 
@@ -78,9 +80,7 @@ npm run build
 ```json
 {
   "$schema": "https://opencode.ai/config.json",
-  "plugin": [
-    "opencode-plan-cards-plugin@0.1.2"
-  ],
+  "plugin": ["opencode-plan-cards-plugin@0.1.3"],
   "agent": {
     "ask": {
       "hidden": true
